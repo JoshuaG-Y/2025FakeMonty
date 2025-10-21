@@ -13,42 +13,42 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
-    SparkMax fL; //each of the motors
+    SparkMax fL; // each of the motors
     SparkMax fR;
     SparkMax bL;
     SparkMax bR;
 
-    public DrivetrainIOSparkMax(int fl, int fr, int bl, int br) { //initiate with the motor IDs
-        fL = new SparkMax(fl, MotorType.kBrushless); //set the motors with their IDs
+    public DrivetrainIOSparkMax(int fl, int fr, int bl, int br) { // initiate with the motor IDs
+        fL = new SparkMax(fl, MotorType.kBrushless); // set the motors with their IDs
         fR = new SparkMax(fr, MotorType.kBrushless);
         bL = new SparkMax(br, MotorType.kBrushless);
         bR = new SparkMax(bl, MotorType.kBrushless);
 
-        SparkMaxConfig cL = new SparkMaxConfig(); //left motor configs
-        cL.idleMode(IdleMode.kCoast); //coast while idle
-        cL.inverted(true); //invert the motors
+        SparkMaxConfig cL = new SparkMaxConfig(); // left motor configs
+        cL.idleMode(IdleMode.kCoast); // coast while idle
+        cL.inverted(true); // invert the motors
 
-        SparkMaxConfig cR = new SparkMaxConfig(); //right motor configs
-        cL.idleMode(IdleMode.kCoast); //coast while idle
-        cR.inverted(false); //do not invert the motors
+        SparkMaxConfig cR = new SparkMaxConfig(); // right motor configs
+        cL.idleMode(IdleMode.kCoast); // coast while idle
+        cR.inverted(false); // do not invert the motors
 
-        fL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //set each the motor configs on the motors
+        fL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // set each the motor configs on the motors
         bL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         fR.configure(cR, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         bR.configure(cR, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        cL.follow(fL); //back motors follow the front ones
-        cR.follow(fR);
+        cL.follow(fL); // back motors follow the front ones
+        cR.follow(fR); 
     }
 
     @Override
-    public void updateInputs(DrivetrainIOInputs inputs) { //update what the volts of the motors are at
+    public void updateInputs(DrivetrainIOInputs inputs) { // update what the volts of the motors are at
         inputs.leftOutputV = fL.getBusVoltage() * fL.getAppliedOutput();
         inputs.rightOutputV = fR.getBusVoltage() * fR.getAppliedOutput();
     }
 
     @Override
-    public void arcadeDrive(double left, double right) { //set the volts for the motors
+    public void arcadeDrive(double left, double right) { // set the volts for the motors
         fL.set(left);
         fR.set(right);
     }
