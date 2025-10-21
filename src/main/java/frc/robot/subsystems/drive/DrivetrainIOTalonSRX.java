@@ -16,16 +16,16 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
     TalonSRX bL;
     TalonSRX bR;
 
-    public DrivetrainIOTalonSRX() {
-        fL = new TalonSRX(DriveConstants.frontLeftID);
+    public DrivetrainIOTalonSRX() { //initialize
+        fL = new TalonSRX(DriveConstants.frontLeftID); //set the motors with their IDs
         fR = new TalonSRX(DriveConstants.frontRightID);
         bL = new TalonSRX(DriveConstants.backLeftID);
         bR = new TalonSRX(DriveConstants.backRightID);
 
-        fL.setInverted(true);
+        fL.setInverted(true); //invert the left motors
         bL.setInverted(true);
 
-        bL.follow(fL);
+        bL.follow(fL); //back motors follow front motors
         bR.follow(fR);
     }
 
