@@ -10,6 +10,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import frc.robot.Constants.DriveConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
@@ -18,11 +19,11 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     SparkMax bL;
     SparkMax bR;
 
-    public DrivetrainIOSparkMax(int fl, int fr, int bl, int br) { // initiate with the motor IDs
-        fL = new SparkMax(fl, MotorType.kBrushless); // set the motors with their IDs
-        fR = new SparkMax(fr, MotorType.kBrushless);
-        bL = new SparkMax(br, MotorType.kBrushless);
-        bR = new SparkMax(bl, MotorType.kBrushless);
+    public DrivetrainIOSparkMax() { // initiate with the motor IDs
+        fL = new SparkMax(DriveConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
+        fR = new SparkMax(DriveConstants.frontRightID, MotorType.kBrushless);
+        bL = new SparkMax(DriveConstants.backLeftID, MotorType.kBrushless);
+        bR = new SparkMax(DriveConstants.backRightID, MotorType.kBrushless);
 
         SparkMaxConfig cL = new SparkMaxConfig(); // left motor configs
         cL.idleMode(IdleMode.kCoast); // coast while idle
