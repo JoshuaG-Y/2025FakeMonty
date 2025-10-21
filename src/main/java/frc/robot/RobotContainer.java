@@ -6,8 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.subsystems.drive.DrivetrainIOTalonSRX;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -18,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  // The robot's subsystems and commands are defined here...
+
   DrivetrainSubsystem driveTrain;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -27,6 +31,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    driveTrain = new DrivetrainSubsystem(new DrivetrainIOTalonSRX());
     configureBindings();
   }
 
@@ -50,6 +55,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    // An example command will be run in autonomous
     return null;
   }
 }
