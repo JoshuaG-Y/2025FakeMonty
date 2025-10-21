@@ -19,7 +19,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     SparkMax bL;
     SparkMax bR;
 
-    public DrivetrainIOSparkMax() { // initiate with the motor IDs
+    public DrivetrainIOSparkMax() { // initiate
         fL = new SparkMax(DriveConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
         fR = new SparkMax(DriveConstants.frontRightID, MotorType.kBrushless);
         bL = new SparkMax(DriveConstants.backLeftID, MotorType.kBrushless);

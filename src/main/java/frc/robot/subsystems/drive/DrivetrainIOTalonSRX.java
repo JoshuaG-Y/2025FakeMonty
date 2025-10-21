@@ -4,7 +4,10 @@
 
 package frc.robot.subsystems.drive;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import frc.robot.Constants.DriveConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
@@ -13,13 +16,28 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
     TalonSRX bL;
     TalonSRX bR;
 
+    public DrivetrainIOTalonSRX() {
+        fL = new TalonSRX(DriveConstants.frontLeftID);
+        fR = new TalonSRX(DriveConstants.frontRightID);
+        bL = new TalonSRX(DriveConstants.backLeftID);
+        bR = new TalonSRX(DriveConstants.backRightID);
+
+        fL.setInverted(true);
+        bL.setInverted(true);
+
+        bL.follow(fL);
+        bR.follow(fR);
+    }
+
     @Override
     public void updateInputs(DrivetrainIOInputs inputs) {
-
+        inputs.leftOutputV = fL.getMotorOutputVoltage();
+        inputs.rightOutputV = fR.getMotorOutputVoltage();
     }
 
     @Override
     public void arcadeDrive(double left, double right) {
-
+        fL.set(TalonSRXControlMode.PercentOutput, left);
+        fR.set(TalonSRXControlMode.PercentOutput, right);
     }
 }
