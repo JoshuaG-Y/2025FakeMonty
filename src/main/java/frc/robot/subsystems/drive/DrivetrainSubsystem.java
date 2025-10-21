@@ -10,11 +10,11 @@ import frc.robot.subsystems.drive.DrivetrainIO.DrivetrainIOInputs;
 
 public class DrivetrainSubsystem extends SubsystemBase {
     
-    private DrivetrainIO input;
+    private DrivetrainIO io;
     private DrivetrainIOInputs inputs;
 
-    public DrivetrainSubsystem(DrivetrainIO _input){
-        this.input = _input;
+    public DrivetrainSubsystem(DrivetrainIO io){
+        this.io = io;
         inputs = new DrivetrainIOInputs();
     }
 
@@ -22,14 +22,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public Command setVoltagesArcadeCommand(double speed, double rotation){
         return new RunCommand(() -> {
             WheelSpeeds movement = DifferentialDrive.arcadeDriveIK(speed, rotation, false); //does calculations for us :)
-            input.arcadeDrive(movement.left, movement.right);
+            io.arcadeDrive(movement.left, movement.right);
         }, this);
     }
 
     @Override
     public void periodic(){
         // Runs once per scheduler run
-        input.updateInputs(inputs);
+        io.updateInputs(inputs);
     }
 
     @Override
