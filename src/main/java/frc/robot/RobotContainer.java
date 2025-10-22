@@ -5,8 +5,11 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.RollerConstants;
 import frc.robot.subsystems.drive.DrivetrainIOTalonSRX;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
+import frc.robot.subsystems.roller.Roller;
+import frc.robot.subsystems.roller.command.RollerCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,6 +24,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   DrivetrainSubsystem drivetrain;
+  Roller roller;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -30,6 +34,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     drivetrain = new DrivetrainSubsystem(new DrivetrainIOTalonSRX());
+    roller = new Roller();
     configureBindings();
   }
 
@@ -45,6 +50,8 @@ public class RobotContainer {
   private void configureBindings() {
     // controls for drivetrain with the left joystick
     drivetrain.setDefaultCommand(drivetrain.setVoltagesArcadeCommand(m_driverController.getLeftY(), m_driverController.getLeftX()));
+    m_driverController.leftTrigger().whileTrue(new RollerCommand(roller, RollerConstants.maxReverseSpeed));
+    m_driverController.rightTrigger().whileTrue(new RollerCommand(roller, RollerConstants.maxForwardSpeed));
   }
 
   /**
