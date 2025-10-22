@@ -1,6 +1,11 @@
 
 package frc.robot.subsystems.drivetrain;
 
+import org.littletonrobotics.junction.Logger;
+
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,6 +17,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     private DrivetrainIO io;
     private DrivetrainIOInputs inputs;
+    DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0.0, 0.0);
 
     public DrivetrainSubsystem(DrivetrainIO io){
         this.io = io;
@@ -27,9 +33,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     @Override
-    public void periodic(){
-        // Runs once per scheduler run
+    public void periodic() {
         io.updateInputs(inputs);
+        odometry.update( //just a bunch of math stuff
+        odometry.getPoseMeters().getRotation()
+            .plus(Rotation2d.fromRadians((inputs.leftVelocity - inputs.rightVelocity)
+                * 0.020 / Units.inchesToMeters(26))),
+        inputs.leftPosM, inputs.rightPosM);
+        Logger.recordOutput("Drivebase Pose", odometry.getPoseMeters());
     }
 
     @Override
