@@ -40,16 +40,22 @@ public class DrivetrainIOSim implements DrivetrainIO {
     public void updateInputs(DrivetrainIOInputs inputs) {
         sim.update(0.02);
 
-        var leftSimState = lM.getSimState();
-        leftSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+        var lSS = lM.getSimState();
+        lSS.setSupplyVoltage(RoboRioSim.getVInVoltage());
 
-        var rightSimState = rM.getSimState();
-        rightSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+        var rSS = rM.getSimState();
+        rSS.setSupplyVoltage(RoboRioSim.getVInVoltage());
 
-        sim.setInputs(leftSimState.getMotorVoltage(), rightSimState.getMotorVoltage());
+        sim.setInputs(lSS.getMotorVoltage(), rSS.getMotorVoltage());
     
-        inputs.leftOutputV = leftSimState.getMotorVoltage();
-        inputs.rightOutputV = rightSimState.getMotorVoltage();
+        inputs.leftOutputV = lSS.getMotorVoltage();
+        inputs.rightOutputV = rSS.getMotorVoltage();
+
+        inputs.leftVelocity = sim.getLeftVelocityMetersPerSecond();;
+        inputs.rightVelocity = sim.getRightVelocityMetersPerSecond();;
+
+        inputs.leftPosM = sim.getLeftPositionMeters();
+        inputs.rightPosM = sim.getRightPositionMeters();
     }
 
     @Override

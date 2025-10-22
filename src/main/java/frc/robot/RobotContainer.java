@@ -6,7 +6,6 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.RollerConstants;
-import frc.robot.subsystems.drivetrain.DrivetrainIOSim;
 import frc.robot.subsystems.drivetrain.DrivetrainIOTalonSRX;
 import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.robot.subsystems.roller.Roller;
@@ -34,7 +33,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    drivetrain = new DrivetrainSubsystem(new DrivetrainIOSim());
+    drivetrain = new DrivetrainSubsystem(new DrivetrainIOTalonSRX());
     roller = new Roller();
     configureBindings();
   }

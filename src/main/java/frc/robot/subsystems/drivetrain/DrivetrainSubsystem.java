@@ -17,6 +17,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     private DrivetrainIO io;
     private DrivetrainIOInputs inputs;
+
     DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0.0, 0.0);
 
     public DrivetrainSubsystem(DrivetrainIO io){
@@ -46,6 +47,5 @@ public class DrivetrainSubsystem extends SubsystemBase {
     @Override
     public void simulationPeriodic(){
         // Runs once per scheduler run DURING SIMULATION
-
     }
 }
