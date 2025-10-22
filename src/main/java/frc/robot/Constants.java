@@ -23,4 +23,9 @@ public final class Constants {
     public static final int backLeftID = -1;
     public static final int backRightID = -1;
   }
+
+  public static class RollerConstants{
+    public static final double maxForwardSpeed = .4; // percentage
+    public static final double maxReverseSpeed = -.4; // also a percentage
+  }
 }
