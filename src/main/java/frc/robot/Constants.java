@@ -22,6 +22,9 @@ public final class Constants {
     public static final int frontRightID = -1;
     public static final int backLeftID = -1;
     public static final int backRightID = -1;
+
+    public static final int sL = 0;
+    public static final int sR = 1;
   }
 
   public static class RollerConstants{

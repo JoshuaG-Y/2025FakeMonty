@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.subsystems.roller.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.roller.Roller;
 
-public class RollerCommand extends Command {
+public class runRoller extends Command {
     
     Roller roller;
     double volts;
 
-    public RollerCommand(Roller roller, double volts){
+    public runRoller(Roller roller, double volts){
         this.roller = roller;
         this.volts = volts;
     }

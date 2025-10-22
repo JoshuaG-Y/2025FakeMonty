@@ -6,10 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.RollerConstants;
-import frc.robot.commands.RollerCommand;
 import frc.robot.subsystems.drivetrain.DrivetrainIOTalonSRX;
 import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.robot.subsystems.roller.Roller;
+import frc.robot.subsystems.roller.commands.runRoller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -50,8 +50,8 @@ public class RobotContainer {
   private void configureBindings() {
     // controls for drivetrain with the left joystick
     drivetrain.setDefaultCommand(drivetrain.setVoltagesArcadeCommand(m_driverController.getLeftY(), m_driverController.getLeftX()));
-    m_driverController.leftTrigger().whileTrue(new RollerCommand(roller, RollerConstants.maxReverseSpeed));
-    m_driverController.rightTrigger().whileTrue(new RollerCommand(roller, RollerConstants.maxForwardSpeed));
+    m_driverController.leftTrigger().whileTrue(new runRoller(roller, RollerConstants.maxReverseSpeed));
+    m_driverController.rightTrigger().whileTrue(new runRoller(roller, RollerConstants.maxForwardSpeed));
   }
 
   /**
