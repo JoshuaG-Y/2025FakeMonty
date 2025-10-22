@@ -6,10 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.RollerConstants;
-import frc.robot.subsystems.drive.DrivetrainIOTalonSRX;
-import frc.robot.subsystems.drive.DrivetrainSubsystem;
+import frc.robot.commands.RollerCommand;
+import frc.robot.subsystems.drivetrain.DrivetrainIOTalonSRX;
+import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.robot.subsystems.roller.Roller;
-import frc.robot.subsystems.roller.command.RollerCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;

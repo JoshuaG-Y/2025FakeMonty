@@ -17,7 +17,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
-  public static class DriveConstants{
+  public static class DrivetrainConstants{
     public static final int frontLeftID = -1;
     public static final int frontRightID = -1;
     public static final int backLeftID = -1;
@@ -25,6 +25,7 @@ public final class Constants {
   }
 
   public static class RollerConstants{
+    public static final int rID = -1;
     public static final double maxForwardSpeed = .4; // percentage
     public static final double maxReverseSpeed = -.4; // also a percentage
   }

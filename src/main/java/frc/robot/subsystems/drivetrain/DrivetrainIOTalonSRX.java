@@ -2,22 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.DrivetrainConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
     TalonSRX fL, fR, bL, bR;
 
     public DrivetrainIOTalonSRX() { //initialize
-        fL = new TalonSRX(DriveConstants.frontLeftID); //set the motors with their IDs
-        fR = new TalonSRX(DriveConstants.frontRightID);
-        bL = new TalonSRX(DriveConstants.backLeftID);
-        bR = new TalonSRX(DriveConstants.backRightID);
+        fL = new TalonSRX(DrivetrainConstants.frontLeftID); //set the motors with their IDs
+        fR = new TalonSRX(DrivetrainConstants.frontRightID);
+        bL = new TalonSRX(DrivetrainConstants.backLeftID);
+        bR = new TalonSRX(DrivetrainConstants.backRightID);
 
         fL.setInverted(true); //invert the left motors
         bL.setInverted(true);

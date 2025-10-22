@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.drivetrain;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -10,17 +10,17 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.DrivetrainConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
     SparkMax fL, fR, bL, bR;
 
     public DrivetrainIOSparkMax() { // initiate
-        fL = new SparkMax(DriveConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
-        fR = new SparkMax(DriveConstants.frontRightID, MotorType.kBrushless);
-        bL = new SparkMax(DriveConstants.backLeftID, MotorType.kBrushless);
-        bR = new SparkMax(DriveConstants.backRightID, MotorType.kBrushless);
+        fL = new SparkMax(DrivetrainConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
+        fR = new SparkMax(DrivetrainConstants.frontRightID, MotorType.kBrushless);
+        bL = new SparkMax(DrivetrainConstants.backLeftID, MotorType.kBrushless);
+        bR = new SparkMax(DrivetrainConstants.backRightID, MotorType.kBrushless);
 
         SparkMaxConfig cL = new SparkMaxConfig(); // left motor configs
         cL.idleMode(IdleMode.kCoast); // coast while idle
