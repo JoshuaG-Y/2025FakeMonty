@@ -11,10 +11,7 @@ import frc.robot.Constants.DriveConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
-    TalonSRX fL; // each of the motors
-    TalonSRX fR;
-    TalonSRX bL;
-    TalonSRX bR;
+    TalonSRX fL, fR, bL, bR;
 
     public DrivetrainIOTalonSRX() { //initialize
         fL = new TalonSRX(DriveConstants.frontLeftID); //set the motors with their IDs

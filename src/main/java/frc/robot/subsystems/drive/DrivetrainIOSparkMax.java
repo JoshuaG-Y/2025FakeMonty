@@ -14,10 +14,7 @@ import frc.robot.Constants.DriveConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
-    SparkMax fL; // each of the motors
-    SparkMax fR;
-    SparkMax bL;
-    SparkMax bR;
+    SparkMax fL, fR, bL, bR;
 
     public DrivetrainIOSparkMax() { // initiate
         fL = new SparkMax(DriveConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
