@@ -1,6 +1,8 @@
 
 package frc.robot.subsystems.drivetrain;
 
+import java.util.function.DoubleSupplier;
+
 import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -26,9 +28,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     // takes input from controller and sets the voltage for motors
-    public Command setVoltagesArcadeCommand(double speed, double rotation){
+    public Command setVoltagesArcadeCommand(DoubleSupplier speed, DoubleSupplier rotation){
         return new RunCommand(() -> {
-            WheelSpeeds movement = DifferentialDrive.arcadeDriveIK(speed, rotation, false); //does calculations for us :)
+            WheelSpeeds movement = DifferentialDrive.arcadeDriveIK(speed.getAsDouble(), rotation.getAsDouble(), false); //does calculations for us :)
             io.arcadeDrive(movement.left, movement.right);
         }, this);
     }

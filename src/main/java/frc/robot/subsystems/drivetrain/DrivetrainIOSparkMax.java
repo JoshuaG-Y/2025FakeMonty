@@ -27,7 +27,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         cL.inverted(true); // invert the motors
 
         SparkMaxConfig cR = new SparkMaxConfig(); // right motor configs
-        cL.idleMode(IdleMode.kCoast); // coast while idle
+        cR.idleMode(IdleMode.kCoast); // coast while idle
         cR.inverted(false); // do not invert the motors
 
         fL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // set each the motor configs on the motors
