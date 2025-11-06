@@ -12,8 +12,6 @@ import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.robot.subsystems.roller.Roller;
 import frc.robot.subsystems.roller.commands.runRoller;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -28,6 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   DrivetrainSubsystem drivetrain;
+  Roller roller;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -37,7 +36,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     drivetrain = new DrivetrainSubsystem(new DrivetrainIOSparkMax());
-    //roller = new Roller();
+    roller = new Roller();
     configureBindings();
   }
 
@@ -53,8 +52,8 @@ public class RobotContainer {
   private void configureBindings() {
     // controls for drivetrain with the left joystick
     drivetrain.setDefaultCommand(drivetrain.setVoltagesArcadeCommand(() -> -m_driverController.getRightX(), () -> -m_driverController.getLeftY()));
-    //m_driverController.leftTrigger().whileTrue(new runRoller(roller, RollerConstants.maxReverseSpeed));
-    //m_driverController.rightTrigger().whileTrue(new runRoller(roller, RollerConstants.maxForwardSpeed));
+    m_driverController.leftTrigger().whileTrue(new runRoller(roller, RollerConstants.maxReverseSpeed));
+    m_driverController.rightTrigger().whileTrue(new runRoller(roller, RollerConstants.maxForwardSpeed));
   }
 
   /**
