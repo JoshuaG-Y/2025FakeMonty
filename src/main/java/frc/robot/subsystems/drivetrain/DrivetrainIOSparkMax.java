@@ -6,17 +6,20 @@ package frc.robot.subsystems.drivetrain;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.Constants.PIDConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
     SparkMax fL, fR, bL, bR;
 
-    public DrivetrainIOSparkMax() { // initiate
+    public DrivetrainIOSparkMax() {
+        // initiate
         fL = new SparkMax(DrivetrainConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
         fR = new SparkMax(DrivetrainConstants.frontRightID, MotorType.kBrushless);
         bL = new SparkMax(DrivetrainConstants.backLeftID, MotorType.kBrushless);
@@ -25,10 +28,12 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         SparkMaxConfig cL = new SparkMaxConfig(); // left motor configs
         cL.idleMode(IdleMode.kCoast); // coast while idle
         cL.inverted(true); // invert the motors
+        cL.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 
         SparkMaxConfig cR = new SparkMaxConfig(); // right motor configs
         cR.idleMode(IdleMode.kCoast); // coast while idle
         cR.inverted(false); // do not invert the motors
+        cR.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 
         fL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // set each the motor configs on the motors
         bL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -46,9 +51,15 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     }
 
     @Override
-    public void arcadeDrive(double left, double right) { // set the volts for the motors
-        fL.set(left);
-        fR.set(right);
+    public void arcadeDrive(double left, double right, boolean pid){
+        if (!pid){
+            fL.set(left);
+            fR.set(right);
+        }
+        else{
+            fL.getClosedLoopController().setReference(left, ControlType.kVelocity);
+            fR.getClosedLoopController().setReference(right, ControlType.kVelocity);
+        }   
     }
     
 }

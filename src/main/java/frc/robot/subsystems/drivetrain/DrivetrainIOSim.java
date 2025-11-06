@@ -59,9 +59,15 @@ public class DrivetrainIOSim implements DrivetrainIO {
     }
 
     @Override
-    public void arcadeDrive(double left, double right) {
-        lM.setControl(lV.withOutput(left));
-        rM.setControl(rV.withOutput(right));
+    public void arcadeDrive(double left, double right, boolean pid){
+        if (!pid){
+            lM.setControl(lV.withOutput(left));
+            rM.setControl(rV.withOutput(right));
+        }
+        else{
+            throw new UnsupportedOperationException("Sim doesnt support pid lolz");
+
+        }
     }
 
 }

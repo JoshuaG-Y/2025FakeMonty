@@ -31,7 +31,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public Command setVoltagesArcadeCommand(DoubleSupplier speed, DoubleSupplier rotation){
         return new RunCommand(() -> {
             WheelSpeeds movement = DifferentialDrive.arcadeDriveIK(speed.getAsDouble(), rotation.getAsDouble(), false); //does calculations for us :)
-            io.arcadeDrive(movement.left, movement.right);
+            io.arcadeDrive(movement.left, movement.right, true);
         }, this);
     }
 
