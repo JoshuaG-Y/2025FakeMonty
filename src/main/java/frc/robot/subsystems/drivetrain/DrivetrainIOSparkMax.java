@@ -29,7 +29,7 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         cL.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 
         SparkMaxConfig cR = new SparkMaxConfig(); // right motor configs
-        cL.idleMode(IdleMode.kCoast); // coast while idle
+        cR.idleMode(IdleMode.kCoast); // coast while idle
         cR.inverted(false); // do not invert the motors
         cR.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 

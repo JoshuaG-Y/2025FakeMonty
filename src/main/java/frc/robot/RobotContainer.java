@@ -6,10 +6,12 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.RollerConstants;
+import frc.robot.subsystems.drivetrain.DrivetrainIOSparkMax;
 import frc.robot.subsystems.drivetrain.DrivetrainIOTalonSRX;
 import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import frc.robot.subsystems.roller.Roller;
 import frc.robot.subsystems.roller.commands.runRoller;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -33,7 +35,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    drivetrain = new DrivetrainSubsystem(new DrivetrainIOTalonSRX());
+    drivetrain = new DrivetrainSubsystem(new DrivetrainIOSparkMax());
     roller = new Roller();
     configureBindings();
   }
@@ -49,7 +51,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // controls for drivetrain with the left joystick
-    drivetrain.setDefaultCommand(drivetrain.setVoltagesArcadeCommand(m_driverController.getLeftY(), m_driverController.getLeftX()));
+    drivetrain.setDefaultCommand(drivetrain.setVoltagesArcadeCommand(() -> -m_driverController.getRightX(), () -> -m_driverController.getLeftY()));
     m_driverController.leftTrigger().whileTrue(new runRoller(roller, RollerConstants.maxReverseSpeed));
     m_driverController.rightTrigger().whileTrue(new runRoller(roller, RollerConstants.maxForwardSpeed));
   }
