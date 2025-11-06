@@ -27,6 +27,13 @@ public final class Constants {
     public static final int sR = 1;
   }
 
+  public static class PIDConstants {
+    public static final int montyDriveKFF = 0;
+    public static final int montyDriveKP = 0;
+    public static final int montyDriveKI = 0;
+    public static final int montyDriveKD = 0;
+  }
+
   public static class RollerConstants{
     public static final int rID = -1;
     public static final double maxForwardSpeed = .4; // percentage

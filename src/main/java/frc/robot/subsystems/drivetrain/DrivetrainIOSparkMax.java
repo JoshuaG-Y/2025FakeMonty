@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.Constants.PIDConstants;
 
 /** Add your docs here. */
 public class DrivetrainIOSparkMax implements DrivetrainIO {
@@ -25,10 +26,12 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
         SparkMaxConfig cL = new SparkMaxConfig(); // left motor configs
         cL.idleMode(IdleMode.kCoast); // coast while idle
         cL.inverted(true); // invert the motors
+        cL.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 
         SparkMaxConfig cR = new SparkMaxConfig(); // right motor configs
         cL.idleMode(IdleMode.kCoast); // coast while idle
         cR.inverted(false); // do not invert the motors
+        cR.closedLoop.pidf(PIDConstants.montyDriveKP, PIDConstants.montyDriveKI, PIDConstants.montyDriveKD, PIDConstants.montyDriveKFF);
 
         fL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // set each the motor configs on the motors
         bL.configure(cL, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
