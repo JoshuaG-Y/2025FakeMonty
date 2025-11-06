@@ -23,7 +23,9 @@ public interface DrivetrainIO {
         public double[] rightCurrentAmps = new double[0];
     }
 
+
+
     // Function to update inputs for class above. This will be put in periodic() function
     public void updateInputs(DrivetrainIOInputs inputs);
-    public void arcadeDrive(double left, double right);
+    public void arcadeDrive(double left, double right, boolean pid);
 }

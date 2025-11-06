@@ -6,6 +6,7 @@ package frc.robot.subsystems.drivetrain;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -17,7 +18,8 @@ import frc.robot.Constants.PIDConstants;
 public class DrivetrainIOSparkMax implements DrivetrainIO {
     SparkMax fL, fR, bL, bR;
 
-    public DrivetrainIOSparkMax() { // initiate
+    public DrivetrainIOSparkMax() {
+        // initiate
         fL = new SparkMax(DrivetrainConstants.frontLeftID, MotorType.kBrushless); // set the motors with their IDs
         fR = new SparkMax(DrivetrainConstants.frontRightID, MotorType.kBrushless);
         bL = new SparkMax(DrivetrainConstants.backLeftID, MotorType.kBrushless);
@@ -49,9 +51,15 @@ public class DrivetrainIOSparkMax implements DrivetrainIO {
     }
 
     @Override
-    public void arcadeDrive(double left, double right) { // set the volts for the motors
-        fL.set(left);
-        fR.set(right);
+    public void arcadeDrive(double left, double right, boolean pid){
+        if (!pid){
+            fL.set(left);
+            fR.set(right);
+        }
+        else{
+            fL.getClosedLoopController().setReference(left, ControlType.kVelocity);
+            fR.getClosedLoopController().setReference(right, ControlType.kVelocity);
+        }   
     }
     
 }

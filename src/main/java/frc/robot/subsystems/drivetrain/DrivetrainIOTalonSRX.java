@@ -13,7 +13,8 @@ import frc.robot.Constants.DrivetrainConstants;
 public class DrivetrainIOTalonSRX implements DrivetrainIO {
     TalonSRX fL, fR, bL, bR;
 
-    public DrivetrainIOTalonSRX() { //initialize
+    public DrivetrainIOTalonSRX() { 
+        //initialize
         fL = new TalonSRX(DrivetrainConstants.frontLeftID); //set the motors with their IDs
         fR = new TalonSRX(DrivetrainConstants.frontRightID);
         bL = new TalonSRX(DrivetrainConstants.backLeftID);
@@ -31,10 +32,15 @@ public class DrivetrainIOTalonSRX implements DrivetrainIO {
         inputs.leftOutputV = fL.getMotorOutputVoltage();
         inputs.rightOutputV = fR.getMotorOutputVoltage();
     }
-
+    
     @Override
-    public void arcadeDrive(double left, double right) {
-        fL.set(TalonSRXControlMode.PercentOutput, left);
-        fR.set(TalonSRXControlMode.PercentOutput, right);
+    public void arcadeDrive(double left, double right, boolean pid){
+        if (!pid){
+            fL.set(TalonSRXControlMode.PercentOutput, left);
+            fR.set(TalonSRXControlMode.PercentOutput, right);
+        }
+        else{
+            throw new UnsupportedOperationException("talon doesnt work pid");
+        }
     }
 }
